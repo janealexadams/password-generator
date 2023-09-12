@@ -1,22 +1,35 @@
 // Variables below
-var passwordLength = // 8-128 ???
 var lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
 var uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numberChars = "0123456789";
 var specialChars = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
-
 // Make variable for the #generate element
 var generateBtn = document.querySelector("#generate");
 
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
+}
+
+// When I click on the button the writePassword will run
+generateBtn.addEventListener('click', writePassword);
+
+
+function generatePassword() {
+
+var userChoice = "" // carring the information - this is the empty plate
+var generatedPassword = ""
+
 // Number of characters prompt
-// Attach event listener to button element
-generateBtn.addEventListener("click", function() {
   // The prompt when the generate button is clicked
   var passUserInput = prompt("Choose a length of at least 8 characters and no more than 128 characters.");
   console.log(passUserInput);
 
   // If user pressed Cancel, immediately end function
-if (passUserInput) {
+if (!passUserInput) {
   return;
 }
 
@@ -30,63 +43,57 @@ if (passUserInput > 128) {
   return;
 }
 
-});
+// });
 
 
 // Lowercase characters prompt
-var lowercaseUserInput = prompt("Would you like lowercase characters (y/n)?");
+var lowercaseUserInput = confirm("Would you like lowercase characters (y/n)?");
 
-if (lowercaseUserInput === "y") {
-
-}
-
-if (lowercaseUserInput === "n") {
-
+if (lowercaseUserInput === true) {
+userChoice = userChoice + lowercaseChars
 }
 
 
 // Uppercase characters prompt
-var uppercaseUserInput = prompt("Would you like uppercase characters (y/n)?");
+var uppercaseUserInput = confirm("Would you like uppercase characters (y/n)?");
 
-if (lowercaseUserInput === "y") {
-
+if (uppercaseUserInput === true) {
+  userChoice = userChoice + uppercaseChars
 }
 
-if (lowercaseUserInput === "n") {
-
-}
 
 // Numeric characters prompt
-var nuUserInput = prompt("Would you like numeric characters (y/n)?");
-console.log(nuUserInput);
+var nuUserInput = confirm("Would you like numeric characters (y/n)?");
+
+if (nuUserInput === true) {
+  userChoice = userChoice + numberChars
+}
 
 
-  
 // Special characters prompt
-var spUserInput = prompt("Would you like special characters (y/n)?");
-console.log(spUserInput);
+var spUserInput = confirm("Would you like special characters (y/n)?");
+
+if (spUserInput === true) {
+  userChoice = userChoice + specialChars
+}
 
 
 
+// Making the password
+userChoice.charAt(Math.floor(Math.floor(Math.random() * userChoice.length)))
+console.log(userChoice)
 
+for (var i = 0; i < passUserInput; i++) {
+  generatedPassword = generatedPassword + userChoice.charAt(Math.floor(Math.floor(Math.random() * userChoice.length)))
+  console.log(generatedPassword)
+}
+console.log(generatedPassword)
 
-
-
-
-
-
-
-
-
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
+return generatedPassword
 
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+
+
+
+
